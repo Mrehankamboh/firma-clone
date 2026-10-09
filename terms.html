@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of Service — Firma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Geist:wght@400;700;900&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css?v=1" />
+  <link rel="stylesheet" href="css/page.css?v=1" />
+</head>
+<body class="page">
+  <div class="chrome">
+    <a class="logo" href="index.html">FIRMA</a>
+    <button class="burger" type="button" aria-label="Open menu"><i></i><i></i></button>
+    <nav class="side">
+      <a href="work.html">Work (8)</a>
+      <a href="studio.html">Studio</a>
+      <a href="journal.html">Journal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="menu">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <nav>
+      <a href="work.html">WORK (8)</a>
+      <a href="studio.html">STUDIO</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </div>
+  <main class="page-main">
+    <p class="kicker">The working agreement</p>
+    <h1>Terms of Service</h1>
+<p>Projects begin with a proposal and a timeline. Scope is agreed before the work starts. Monthly plans cover the hours and priorities listed on the homepage. One-off projects are scoped the same way: a call, a proposal, then the work.</p>
+<p>Work product belongs to the client once invoices are paid. Firma may show the project in the portfolio unless you ask us not to.</p>
+  </main>
+  <script>
+    const menu = document.querySelector(".menu");
+    document.querySelector(".burger").onclick = () => menu.classList.add("open");
+    document.querySelector(".x").onclick = () => menu.classList.remove("open");
+  </script>
+</body>
+</html>

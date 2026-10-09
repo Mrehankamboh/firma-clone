@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work — Firma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Geist:wght@400;700;900&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css?v=1" />
+  <link rel="stylesheet" href="css/page.css?v=1" />
+</head>
+<body class="page">
+  <div class="chrome">
+    <a class="logo" href="index.html">FIRMA</a>
+    <button class="burger" type="button" aria-label="Open menu"><i></i><i></i></button>
+    <nav class="side">
+      <a href="work.html">Work (8)</a>
+      <a href="studio.html">Studio</a>
+      <a href="journal.html">Journal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="menu">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <nav>
+      <a href="work.html">WORK (8)</a>
+      <a href="studio.html">STUDIO</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </div>
+  <main class="page-main">
+    <p class="kicker">Projects (8)</p>
+    <h1>Our Projects</h1>
+<p>Eight projects. Three of them lead the story: strategy, a cinematic portfolio, and a shop with the charm of a paper studio.</p>
+<div class="cards">
+  <a href="work/common-future-co.html"><p class="kicker">Strategy / Digital</p><h2>Common Future Co.</h2><p>A big mission, rewritten so it felt forward-thinking and accessible.</p></a>
+  <a href="work/lumen-path-studio.html"><p class="kicker">Web / Creative Direction</p><h2>Lumen Path Studio</h2><p>A portfolio site for visual storytellers — alive, and made for the work.</p></a>
+  <a href="work/paper-bloom-collective.html"><p class="kicker">Visual Identity / Web</p><h2>Paper Bloom Collective</h2><p>An online shop with the warmth of the physical space.</p></a>
+</div>
+  </main>
+  <script>
+    const menu = document.querySelector(".menu");
+    document.querySelector(".burger").onclick = () => menu.classList.add("open");
+    document.querySelector(".x").onclick = () => menu.classList.remove("open");
+  </script>
+</body>
+</html>

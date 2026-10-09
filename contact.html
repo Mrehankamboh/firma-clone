@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Firma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Geist:wght@400;700;900&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css?v=1" />
+  <link rel="stylesheet" href="css/page.css?v=1" />
+</head>
+<body class="page">
+  <div class="chrome">
+    <a class="logo" href="index.html">FIRMA</a>
+    <button class="burger" type="button" aria-label="Open menu"><i></i><i></i></button>
+    <nav class="side">
+      <a href="work.html">Work (8)</a>
+      <a href="studio.html">Studio</a>
+      <a href="journal.html">Journal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="menu">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <nav>
+      <a href="work.html">WORK (8)</a>
+      <a href="studio.html">STUDIO</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </div>
+  <main class="page-main">
+    <p class="kicker">Work with us</p>
+    <h1>Got an idea?</h1>
+<p>Send a message and we’ll take it from there. We work best through open, honest collaboration.</p>
+<p><a href="mailto:hello@firma.com">hello@firma.com</a><br>+44 20 7946 0872<br>91 Brick Lane, London E1 6QL</p>
+<form class="stack" onsubmit="event.preventDefault(); this.innerHTML='<p>Message received. We’ll write back.</p>'">
+  <input class="field" name="name" placeholder="Your name" required />
+  <input class="field" type="email" name="email" placeholder="Email" required />
+  <input class="field" name="note" placeholder="What’s the project?" required />
+  <button class="dotlink" type="submit">Send Message</button>
+</form>
+  </main>
+  <script>
+    const menu = document.querySelector(".menu");
+    document.querySelector(".burger").onclick = () => menu.classList.add("open");
+    document.querySelector(".x").onclick = () => menu.classList.remove("open");
+  </script>
+</body>
+</html>

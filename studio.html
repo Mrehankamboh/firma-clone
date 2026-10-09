@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio — Firma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Geist:wght@400;700;900&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css?v=1" />
+  <link rel="stylesheet" href="css/page.css?v=1" />
+</head>
+<body class="page">
+  <div class="chrome">
+    <a class="logo" href="index.html">FIRMA</a>
+    <button class="burger" type="button" aria-label="Open menu"><i></i><i></i></button>
+    <nav class="side">
+      <a href="work.html">Work (8)</a>
+      <a href="studio.html">Studio</a>
+      <a href="journal.html">Journal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  <div class="menu">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <nav>
+      <a href="work.html">WORK (8)</a>
+      <a href="studio.html">STUDIO</a>
+      <a href="journal.html">JOURNAL</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+  </div>
+  <main class="page-main">
+    <p class="kicker">London</p>
+    <h1>We are Firma</h1>
+<p>Every project is different, but the process stays sharp and simple. We’re a brand and design studio built on clarity, creativity, and craft. From strategy to storytelling, we help businesses find their voice and connect with their audience.</p>
+<p>We work closely with our clients — as collaborators, not just creatives — to build brands that last.</p>
+<div class="team">
+  <article id="leo"><img src="assets/leo.png" alt="Leo Marten" /><h2>Leo Marten</h2><p class="kicker">CEO &amp; Partner</p></article>
+  <article id="nina"><img src="assets/team-b.png" alt="Nina Moretti" /><h2>Nina Moretti</h2><p class="kicker">Design Director</p></article>
+  <article id="tomas"><img src="assets/team-a.png" alt="Tomas Reed" /><h2>Tomas Reed</h2><p class="kicker">Lead Developer</p></article>
+  <article id="alma"><img src="assets/team-c.png" alt="Alma Castellano" /><h2>Alma Castellano</h2><p class="kicker">Strategy &amp; Client Lead</p></article>
+</div>
+  </main>
+  <script>
+    const menu = document.querySelector(".menu");
+    document.querySelector(".burger").onclick = () => menu.classList.add("open");
+    document.querySelector(".x").onclick = () => menu.classList.remove("open");
+  </script>
+</body>
+</html>
