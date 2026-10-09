@@ -60,6 +60,7 @@ Rehan’s own deploys and repo links use these. Do not use the old handles.
 - Stack: HTML + CSS + small JS (or Next/React if the user asked). No Framer runtime.
 - Design canvas is often 1440×900. Absolute `left: 1036px` will clip on narrower widths.
 - Probe scripts (`_probe-*.cjs`, `_qa-*.cjs`) are **not** the site. Do not leave them in the folder you hand over.
+- Every clone ships a `README.md` in the handoff folder: what it is, the live URL, how to run it, and the pages. Add it without being asked, including on the next project.
 - Music must not be a YouTube link. Localhost YouTube embeds **Error 153** — use local `<video>` on iPod LCD.
 
 ## Self-QA (no prompting)
@@ -97,6 +98,7 @@ Rehan’s own deploys and repo links use these. Do not use the old handles.
 | Music | Opens YouTube | `data-open="ipod"`; never `window.open` YT |
 | iPod A/V | No video/voice on localhost | HTML5 `<video>` on LCD; overlay play in same click |
 | QA scripts | Mixed into site folder | Ship only html/css/js/assets (or Next app) |
+| Handoff | Repo has no README | `README.md`: live URL, run command, pages |
 | 3D card fan | Cards pile / front one huge | 4-spoke cylinder: `perspective(500px) rotateY` on handle, cards at ±90° on 1400px arms |
 | Sticky works stack | Tint slides up with cards | One pinned 800px tint; crossfade when slot `top<=0` |
 | Expertise tool cards | Flat grey, no ring | 2px inset inner panel; 687×484 orange-gold glow clipped |

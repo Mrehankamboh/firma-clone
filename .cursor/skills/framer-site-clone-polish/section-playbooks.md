@@ -830,3 +830,13 @@ Live markup keeps Our at `transform: none`, Services near `translateX(145px)`, a
 **Fix:** Do not set `cursor: none`. Put `cursor: pointer` only on `[data-cursor]`. Mark the whole pricing band `data-ink="light"`, not only its photo, or the dot stays black on the dark plans. The follower keeps updating from the scroll tick.
 
 ---
+
+## 63. Every clone ships a README
+
+**Breaks:** The handoff folder and the GitHub repo have no README, so the next person cannot tell what the clone is or how to open it.
+
+**Probe:** The folder you hand over has `README.md` at the root. It names the live URL, the run command (`npx serve -l 4173 .` or `npm run dev`), and the pages.
+
+**Fix:** Write that README on every clone, including the next project, without waiting to be asked. Keep probe scripts out of it.
+
+---
