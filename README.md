@@ -1,8 +1,16 @@
 # Firma
 
-Self-written clone of [firma-template.framer.website](https://firma-template.framer.website/). HTML, CSS, and a small script. No Framer runtime.
+Let’s create ideas.
+The word turns.
+Brands.
+Products.
+Design.
+Things.
+Together.
 
-Desktop is a horizontal track at 1440×900. Below about 860px the page stacks.
+Firma is an independent studio in London. A business comes in with a name and leaves with a voice, a look, and a way to meet the people it is for. Less talk. More craft.
+
+Desktop is a horizontal track at 1440×900. Below about 860px the page stacks. HTML, CSS, and a small script.
 
 ## Run
 
