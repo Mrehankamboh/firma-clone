@@ -98,24 +98,24 @@ function tick() {
       const target = el.querySelector("img") || el;
       target.style.transform = `translate3d(${(from * (1 - p)).toFixed(2)}px,0,0)`;
     });
-    document.querySelectorAll(".p-word").forEach((el) => {
-      const head = el.closest(".p-line");
-      const band = el.closest(".band");
-      const pageX = band.offsetLeft + head.offsetLeft;
-      const view = window.innerWidth / scale;
-      const enter = current - (pageX - view);
-      const t = Math.min(1, Math.max(0, (enter - Number(el.dataset.delay)) / 80));
-      const p = 1 - Math.pow(1 - t, 3);
-      el.style.opacity = p.toFixed(3);
-      el.style.filter = `blur(${(10 * (1 - p)).toFixed(2)}px)`;
-      el.style.transform = `translate3d(0,${(10 * (1 - p)).toFixed(1)}px,0)`;
-    });
+    stepIntro();
     document.querySelectorAll("[data-rise]").forEach((el) => {
       const pin = el.classList.contains("pin") ? el : el.closest(".pin");
       const band = el.closest(".band");
       const pageX = band.offsetLeft + pin.offsetLeft;
       const screen = (pageX - current) * scale;
       if (screen < window.innerWidth) {
+        if (performance.now() < (window.__pageIn || 0)) {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.dataset.rode = "1";
+          return;
+        }
+        if (el.dataset.rode) {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          return;
+        }
         if (!el.dataset.risen) el.dataset.risen = String(performance.now() + Number(el.dataset.rise || 0));
         const u = Math.min(1, Math.max(0, (performance.now() - Number(el.dataset.risen)) / 1100));
         const p = easeIO(u);
@@ -123,6 +123,7 @@ function tick() {
         el.style.transform = `translate3d(0,${(60 * (1 - p)).toFixed(1)}px,0)`;
       } else {
         delete el.dataset.risen;
+        delete el.dataset.rode;
         el.style.opacity = "0";
         el.style.transform = "translate3d(0,60px,0)";
       }
@@ -187,7 +188,83 @@ function tick() {
       }
     });
   }
+  if (mobile) stepIntro();
   requestAnimationFrame(tick);
+}
+
+function splitChars(el) {
+  const text = el.textContent;
+  el.textContent = "";
+  [...text].forEach((ch) => {
+    const s = document.createElement("span");
+    s.className = "char";
+    s.textContent = ch;
+    el.appendChild(s);
+  });
+}
+
+function splitWords(root) {
+  const walk = (node) => {
+    [...node.childNodes].forEach((child) => {
+      if (child.nodeType === 3) {
+        const parts = child.textContent.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            frag.appendChild(document.createTextNode(part));
+            return;
+          }
+          const s = document.createElement("span");
+          s.className = "intro-word";
+          s.textContent = part;
+          frag.appendChild(s);
+        });
+        child.replaceWith(frag);
+      } else if (child.nodeType === 1 && !child.classList.contains("intro-word") && !child.classList.contains("p-word")) {
+        walk(child);
+      }
+    });
+  };
+  walk(root);
+}
+
+function armSpans(list, start, step, dur, ty) {
+  list.forEach((el, i) => {
+    el.dataset.t0 = String(start + i * step);
+    el.dataset.dur = String(dur);
+    if (ty) el.dataset.ty = String(ty);
+  });
+}
+
+function stepIntro() {
+  const now = performance.now();
+  document.querySelectorAll("[data-t0]").forEach((el) => {
+    const dur = Number(el.dataset.dur || 800);
+    const u = Math.min(1, Math.max(0, (now - Number(el.dataset.t0)) / dur));
+    const p = easeIO(u);
+    if (!el.dataset.nofade) el.style.opacity = p.toFixed(3);
+    if (!el.dataset.noblur) el.style.filter = `blur(${(10 * (1 - p)).toFixed(2)}px)`;
+    const ty = Number(el.dataset.ty || 0);
+    if (ty) el.style.transform = `translateY(${(ty * (1 - p)).toFixed(2)}px)`;
+    else if (!el.classList.contains("load-fade") && !el.classList.contains("nav-in")) el.style.transform = "";
+  });
+  document.querySelectorAll("[data-intro]").forEach((group) => {
+    const r = group.getBoundingClientRect();
+    const shown = r.left < window.innerWidth - 40 && r.right > 40;
+    const words = [...group.querySelectorAll(".intro-word, .p-word")];
+    if (shown && !group.dataset.played) {
+      group.dataset.played = "1";
+      armSpans(words, now, 25, 1200, 0);
+    } else if (!shown && r.left >= window.innerWidth - 40) {
+      delete group.dataset.played;
+      words.forEach((w) => {
+        delete w.dataset.t0;
+        w.style.opacity = "0";
+        w.style.filter = "blur(10px)";
+      });
+    }
+  });
 }
 
 window.addEventListener("wheel", (e) => {
@@ -246,9 +323,11 @@ document.querySelector(".menu .x").addEventListener("click", () => {
 const words = [...document.querySelectorAll(".word")];
 let wi = 0;
 setInterval(() => {
+  if (!words.length) return;
   words[wi].classList.remove("on");
   wi = (wi + 1) % words.length;
   words[wi].classList.add("on");
+  armSpans([...words[wi].querySelectorAll(".char")], performance.now(), 50, 800, 10);
 }, 1600);
 
 document.querySelectorAll(".faq-item button").forEach((btn) => {
@@ -273,15 +352,26 @@ document.querySelector("#subscribe").addEventListener("click", (e) => {
 });
 
 const reel = document.querySelector(".reel");
+function closeReel() {
+  reel.classList.remove("open");
+  const v = reel.querySelector("video");
+  v.pause();
+  v.muted = true;
+}
 document.querySelector(".mark").addEventListener("click", () => {
   reel.classList.add("open");
   const v = reel.querySelector("video");
   v.currentTime = 0;
-  v.play();
+  v.muted = false;
+  const pending = v.play();
+  if (pending) pending.catch(() => {
+    v.muted = true;
+    v.play();
+  });
 });
-reel.querySelector("button").addEventListener("click", () => {
-  reel.classList.remove("open");
-  reel.querySelector("video").pause();
+reel.querySelector("button").addEventListener("click", closeReel);
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeReel();
 });
 
 let pointerX = 0;
@@ -361,6 +451,35 @@ try {
 window.addEventListener("pagehide", () => {
   try { sessionStorage.setItem("firma-x", String(Math.round(target))); } catch (err) {}
 });
+const boot = performance.now();
+const lets = document.querySelector(".lets");
+if (lets) {
+  splitChars(lets);
+  armSpans([...lets.querySelectorAll(".char")], boot, 50, 800, 10);
+}
+const lead = lets ? lets.querySelectorAll(".char").length * 50 : 0;
+document.querySelectorAll(".word").forEach((el) => splitChars(el));
+const firstWord = document.querySelector(".word.on");
+if (firstWord) armSpans([...firstWord.querySelectorAll(".char")], boot + lead, 50, 800, 10);
+document.querySelectorAll(".rail a").forEach((a, i) => {
+  const s = document.createElement("span");
+  s.className = "nav-in";
+  s.textContent = a.textContent;
+  a.textContent = "";
+  a.appendChild(s);
+  s.dataset.t0 = String(boot + 1000 + i * 100);
+  s.dataset.dur = "1000";
+  s.dataset.ty = "14";
+  s.dataset.noblur = "1";
+  s.dataset.nofade = "1";
+});
+document.querySelectorAll(".load-fade").forEach((el) => {
+  const mark = el.classList.contains("mark");
+  el.dataset.t0 = String(boot + (mark ? 200 : 1000));
+  el.dataset.dur = mark ? "800" : "1000";
+  el.dataset.noblur = "1";
+});
+document.querySelectorAll(".quote").forEach(splitWords);
 requestAnimationFrame(tick);
 window.__scrollTo = (x) => {
   target = Math.max(0, Math.min(maxScroll(), x));

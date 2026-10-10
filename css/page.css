@@ -31,3 +31,4 @@ body.page a, body.page button { cursor: pointer; }
 form.stack { display: grid; gap: 8px; max-width: 460px; margin-top: 24px; }
 form.stack button { margin-top: 16px; width: fit-content; background: none; }
 .page .cursor, .page .progress { display: none; }
+

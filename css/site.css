@@ -179,8 +179,16 @@ img, video { display: block; max-width: none; }
   line-height: 58px;
   opacity: 0;
   white-space: nowrap;
-  transition: opacity 0.45s ease;
 }
+.char, .intro-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  white-space: pre;
+}
+.char { transform: translateY(10px); }
+.nav-in { display: inline-block; transform: translateY(14px); }
+.load-fade { opacity: 0; }
 .hero-line { display: flex; align-items: flex-start; gap: 16px; }
 .hero-slot { position: relative; min-width: 240px; height: 64px; }
 .word.on { opacity: 1; }
@@ -217,6 +225,33 @@ img, video { display: block; max-width: none; }
 }
 [data-appear] { opacity: 0; }
 [data-rise] { opacity: 0; }
+
+@view-transition { navigation: auto; }
+::view-transition { background: #000; }
+::view-transition-old(root),
+::view-transition-new(root) { mix-blend-mode: normal; }
+::view-transition-old(root) {
+  animation: 0.48s cubic-bezier(0.7, 0, 0.84, 0) both page-out-up;
+}
+::view-transition-new(root) {
+  animation: 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both page-in-up;
+}
+@keyframes page-out-up {
+  to { transform: translateY(-100%); }
+}
+@keyframes page-in-up {
+  from { transform: translateY(100%); }
+}
+html.boot { background: #000; }
+html.boot body {
+  animation: page-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.boot body.home { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.boot body,
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none; }
+}
 .proj {
   width: 480px;
   height: 441px;
@@ -798,7 +833,12 @@ img, video { display: block; max-width: none; }
   text-transform: uppercase;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.rail:hover a,
+.side:hover a { opacity: 0.3; }
+.rail a:hover,
+.side a:hover { opacity: 1; }
 .side a { color: #fff; }
 .side {
   position: absolute;
@@ -815,9 +855,44 @@ img, video { display: block; max-width: none; }
   display: flex;
   gap: 48px;
 }
-.social a { width: 24px; height: 24px; display: grid; place-items: center; }
-.social svg, .social svg * { stroke: #fff; }
-.social svg [fill="#111"] { fill: #fff; }
+.social a { position: relative; width: 24px; height: 24px; display: block; }
+.social a::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: #fff;
+  transform: translate(-50%, -50%) scale(0.03125);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s linear;
+}
+.social a:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
+.social svg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.social svg.on { opacity: 0; transition: opacity 0.35s linear; }
+.social a:hover svg.on {
+  opacity: 1;
+  transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+}
 .progress {
   position: fixed;
   left: 0;
@@ -912,23 +987,24 @@ img, video { display: block; max-width: none; }
 .reel {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  z-index: 60;
+  z-index: 80;
+  background: #000;
   display: none;
-  align-items: center;
-  justify-content: center;
 }
-.reel.open { display: flex; }
-.reel video { width: min(1100px, 90vw); height: auto; background: #000; }
+.reel.open { display: block; }
+.reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  display: block;
+}
 .reel button {
   position: absolute;
-  top: 24px;
-  right: 28px;
-  background: none;
+  inset: 0;
   border: 0;
-  color: #fff;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  background: transparent;
+  color: transparent;
 }
 
 .circle-type { overflow: visible; pointer-events: none; transform-origin: center center; will-change: transform; }

@@ -840,3 +840,163 @@ Live markup keeps Our at `transform: none`, Services near `translateX(145px)`, a
 **Fix:** Write that README on every clone, including the next project, without waiting to be asked. Keep probe scripts out of it.
 
 ---
+
+## 64. Firma — vertical nav fades the other labels
+
+**Breaks:** WORK, STUDIO, JOURNAL, and CONTACT stay solid black when one of them is hovered.
+
+**Probe:** At 1440×900 the left labels are 14px Geist 900, uppercase, vertical. Hovering one link sets the other three to opacity 0.3 over about 0.6s. The hovered label stays at 1. Computed color stays `#000`; the gray is the fade, not a new fill. The same links on inner pages use the white color and the same fade.
+
+**Fix:** On `.rail:hover a` and `.side:hover a`, set opacity 0.3, and set the hovered link back to 1. Transition opacity 0.6s with the site ease.
+
+---
+
+## 65. Firma — refresh replays the enter
+
+**Breaks:** A reload paints the hero, the quote, and the principles line already finished. Live starts them again: letters blur in, the side labels slide up, and the quote reveals word by word even when that band is already on screen.
+
+**Probe:** At 1440×900 a fresh load runs “Let’s create” plus the visible word as characters: opacity 0 and blur(10px) to clear over 800ms, 50ms apart, with translateY(10px). The four side labels move from translateY(14px) over 1000ms, starting 1s in and 100ms apart. “together.” and the line under it fade over 1000ms after 1s. The about quote and “NOT JUST ANOTHER CREATIVE AGENCY” are words, blur plus opacity, 1200ms, 25ms apart, and they start when the line is in view — including right after a refresh that restored that scroll.
+
+**Fix:** Split those lines and play the timers from the first frame if they are on screen. Do not scrub the principles words with scroll distance, or a refresh on that band skips the reveal. Inner pages use the same rise on the title and the same 14px slide on the side labels.
+
+---
+
+## 66. Firma — the contact route is its own horizontal track
+
+**Breaks:** `contact.html` is a short vertical form. Live `/contact` is a 11241×900 sideways page: WORK / WITH US over the door, email and address, the dark GOT AN IDEA form, FAQ, Alma, the newsletter, then the cap and footer.
+
+**Probe:** At 1440×900, `/contact` scrollWidth is about 11241. Settled WORK is page x 249, y 298, Playfair Display 400, 180/144, letter-spacing −10.8px. WITH US is x 271, y 458, and US is `#ff7a6e`. The door frame is x 821, 900×900, and the 1100px image sits at translateX(about −155). On arrival the headline parent is translateY(60) and eases to 0 over about 1.1s. Later bands use that same rise when they enter. Skip the Buy Template badge. The crumb is FIRMA / CONTACT with mix-blend difference, so it reads black on white and white on the form.
+
+**Fix:** Give the contact page its own scaler and a track of 11241px. Do not load the home script, or the home track length is applied. Reuse the home rise (opacity 0, translateY 60, 1100ms). Keep the door clip at 900px so US lands on the brick.
+
+---
+
+## 67. Firma — idea lines drift and stay with the screen
+
+**Breaks:** GOT AN IDEA? has a static FIRMA pattern that scrolls away with the heading.
+
+**Probe:** At 1440×900 on `/contact`, the Partners band is black and transparent over a fixed 1440×900 layer. The words are Geist 900, 200px, line-height 180, letter-spacing −6px, white at opacity 0.07, in flex rows with a 30px gap, rotated −10°. Alternate rows translate about 45px per second in opposite directions. The layer stays on the viewport while the heading and form slide across it. The heading still rises from translateY(60).
+
+**Fix:** Clip the rows to the band, counter-scroll the layer by `current − bandLeft`, and loop each row at 45px/s. Do not paint the words in solid gray.
+
+---
+
+## 68. Firma — the journal route is its own horizontal track
+
+**Breaks:** `journal.html` is a short stacked list. Live `/journal` is a 12034×900 sideways page.
+
+**Probe:** At 1440×900, settled “IDEAS” is x 210 y 303, Playfair Display 400, 180/144, letter-spacing −10.8px. “INSIGHTS” is x 268 y 467. The ampersand is `#ff7a6e` and its box is x 700 y 255, 140×240. The flower frame is x 890, 900×900, overflow hidden, and the 1100px image sits at translateX(about −161). On arrival the lines rise from translateY(60). Five articles follow: date, 48px title, blurb, Read Article at the bottom of a 480×585 column, with a 490×585 photo between columns. Then Tomas, the newsletter, and the footer.
+
+**Fix:** Give the journal page its own 12034px track and the same rise used on contact. Keep the flower clip at 900px so INSIGHTS crosses onto the photo. Do not load the home script.
+
+---
+
+## 69. Firma — inner pages use the same arrival rise
+
+**Breaks:** Work, Studio, articles, and case studies fade up 24px. Contact and Journal rise 60px over 1.1s.
+
+**Probe:** On contact, a block in view starts at opacity 0 and translateY(60) and eases to rest over 1100ms with cubic-bezier(0.4, 0, 0.2, 1). The next block waits about 80ms.
+
+**Fix:** Use that same rise on every `body.page` title, paragraph, card, and portrait. Keep the home page’s letter enter as it is.
+
+---
+
+## 70. Firma — the page itself slides up
+
+**Breaks:** Opening a page fades the words up in place. Live moves the whole page up off a black field, and the page you leave slides up with it.
+
+**Probe:** On the journal recording at 1440×900, the new page enters from the bottom over black and is in place within about 0.7s. The heading and the photo move together, already opaque. Going back, the current page leaves upward and black shows underneath before the next page rises.
+
+**Fix:** Slide `body` from translateY(100%) over 0.7s with cubic-bezier(0.22, 1, 0.36, 1), and use a black page background for the gap. On a same-site click, let the old page leave upward and the new page follow. Keep the home letter enter. Do not also fade the first screen’s text out while the page is still rising. A direct refresh of the homepage does not use this slide: live keeps the page still and blurs the hero letters in.
+
+---
+
+## 77. Firma — homepage refresh is the letter blur
+
+**Breaks:** Refreshing the homepage slides the whole page up off black, and “together.”, the sentence, and FIRMA fade in late.
+
+**Probe:** At 1440×900 a fresh load of the live homepage leaves `body` at `transform: none`. “Let’s create” and the cycling word start at opacity 0, blur(10px), translateY(10px), then clear over about 800ms, 50ms apart. “together.” and FIRMA are already opacity 1 while those letters are still blurred.
+
+**Fix:** Skip the page-slide on `body.home`. Leave “together.”, the sentence, and the wordmark visible. Keep the letter blur on “Let’s create” and the cycling word. Other pages still slide in.
+
+---
+
+## 78. Firma — social icons grow a circle
+
+**Breaks:** Instagram and Dribbble stay the same size on hover.
+
+**Probe:** At 1440×900 the icons sit in the fixed nav, which uses `mix-blend-mode: difference`. Each link is 24×24. A white circle starts at 2×2, opacity 0, centered on the icon. On hover it scales to 64×64 over about 0.5s while its opacity fades in about 0.12s later. A black copy of the same icon fades in with that opacity. Through the blend, the circle reads black and the icon reads white. The white icon underneath stays put.
+
+**Fix:** Keep both icon fills inside the difference layer. Grow a 64px white circle from `scale(0.03125)` behind the icon, and fade the black icon in on top. Do not fade the resting white icon.
+
+---
+
+## 79. Firma — the reel fills the screen
+
+**Breaks:** Clicking FIRMA opens the showreel in a small centered box with native video controls.
+
+**Probe:** On the live homepage the wordmark video is the same clip. Opening it covers the browser page edge to edge. The picture uses `object-fit: cover`, with no control bar.
+
+**Fix:** Pin the reel to the viewport and size the video to 100% by 100% with `object-fit: cover`. Drop the native controls. Close it from the full-screen hit area (the cursor reads CLOSE) or Escape.
+
+---
+
+## 71. Firma — the studio route is its own horizontal track
+
+**Breaks:** `studio.html` is a short stacked list. Live `/studio` is a 21811×900 sideways page.
+
+**Probe:** At 1440×900, “WE” is `#ff7a6e` and “ARE / FIRMA” is Playfair Display 400, 180/144. A 900px photo follows. Then the intro, four portraits on white, a black client band, a white process band, black awards, the newsletter, and the footer wash. “The Team” and “The Process” are vertical tickers that move with the scroll.
+
+**Fix:** Give the studio page its own 21811px track and the same page-rise used on journal. Keep each band’s background: white, black clients, white process, black awards, white footer. Do not load the home script.
+
+---
+
+## 72. Firma studio — clients wash, square process frames, copy icon
+
+**Breaks:** The black clients band looks empty, process photos are circles, “Fun fact” is coral, and the studio footer uses a text “Copy address” button.
+
+**Probe:** At 1440×900, “OUR / CLIENTS!” is Playfair 104/104, the “!” is `#ff7a6e`, and a 200px Geist “FIRMA” wash at opacity 0.07 sits rotated −10° behind it. Process photos are square clips (506 and 338) plus one 450×900 portrait, `object-fit: cover`, not circles. The fun-fact mark is a 32px coral quote icon; the words “Fun fact:” are black. The footer copy control is the same 32px coral icon as journal, at left 339 top 192. Awards text must paint above the 900px trophy photo.
+
+**Fix:** Reuse the contact watermark inside the clients band. Place the live square crops, keep text above the awards photo, and use the journal copy icon. Do not color the fun-fact label coral.
+
+---
+
+## 73. Firma studio — vertical ticker lines
+
+**Breaks:** “The Team” sits too high beside Leo, so the wrong letters show in the column.
+
+**Probe:** The team ticker is `top: -1200px`, left 71, and each “The Team —” cell is 1128px. “The Process —” stays at `top: -1350px` with a 1325px cell. Both are Playfair 300, 240px, `#eee`, letter-spacing -12px, and they move down with the scroll.
+
+**Fix:** Set those two tops and cell heights on the studio page. Do not reuse the 905px homepage cell for these lines.
+
+---
+
+## 74. Firma studio — team gray wash
+
+**Breaks:** The gap between team portraits is flat white. Live fades that gap from white to `#ededed`.
+
+**Probe:** Leo, Tomas, and Nina each have a wash, `linear-gradient(90deg, #fff, #ededed)`, 900px tall. It starts 80px into that portrait and ends 80px into the next one. Widths: Leo 1482, Tomas 1336, Nina 1462. Alma has none. The portrait and the bio sit above the wash.
+
+**Fix:** Paint those three washes behind the photos and text. Do not put one on Alma.
+
+---
+
+## 75. Firma work — horizontal project track
+
+**Breaks:** The work page was a short stacked list. Live is one horizontal track, 19047px wide.
+
+**Probe:** Eight 900×900 photos sit on a 1620px pitch, the first at page x 929. Each photo is a 1100×900 image that drifts from -200 toward 0 (`data-extra="880"`). The text column starts 900px to the right of the photo. “Common Future Co.” breaks as “Common” / “Future Co.” The Nina band has a coral first sentence and a vertical “Nina —” ticker: box `top: -1350px`, each cell 685px, and the roll shifted up 80px so the letters sit beside her shoulder.
+
+**Fix:** Build the work page as its own track with work.css and work.js. Do not load site.js or page.css on it. Keep the page-slide entrance.
+
+---
+
+## 76. Firma work — photo plate and newsletter keys
+
+**Breaks:** Project text sits flush against the photo, and the newsletter keys stay still.
+
+**Probe:** Each project has a white plate, 608×569, starting 64px left of the text and 64px above it, painted over the photo. The five keys use the homepage speeds (F −0.02938, I 0.05737, A 0.02982, M −0.05666, R still) but they start from the work-page clamps, not the homepage anchor.
+
+**Fix:** Cover the photo edge with that plate. Move each key from its own start offset once the scroll passes its start point, and stop at its end offset.
+
+---

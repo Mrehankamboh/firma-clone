@@ -1,0 +1,194 @@
+body.contact { --track: 11241px; }
+
+.crumb {
+  position: absolute;
+  left: 64px;
+  top: 45px;
+  margin: 0;
+  color: #fff;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: -0.6px;
+}
+.crumb a { color: inherit; }
+
+.say h2,
+.say h1 {
+  z-index: 3;
+  font-weight: 400;
+}
+.door { overflow: hidden; z-index: 1; }
+.door img {
+  width: 1100px;
+  height: 900px;
+  max-width: none;
+  object-fit: cover;
+}
+
+.info-copy {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #757575;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.addr { display: block; width: 320px; }
+
+.idea { background: #000; }
+.wm {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1440px;
+  height: 900px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.wm-rot {
+  position: absolute;
+  left: -35%;
+  top: -280px;
+  width: 170%;
+  transform: rotate(-10deg);
+  transform-origin: 0 0;
+}
+.wm-row {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  margin: 0 0 20px;
+  animation: wm-left 60s linear infinite;
+}
+.wm-row.rev { animation-name: wm-right; }
+.wm-row span {
+  font-family: Geist, sans-serif;
+  font-weight: 900;
+  font-size: 200px;
+  line-height: 180px;
+  letter-spacing: -6px;
+  color: #fff;
+  opacity: 0.07;
+  white-space: nowrap;
+}
+@keyframes wm-left {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+@keyframes wm-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.idea .pin { z-index: 2; }
+.idea h2 {
+  margin: 0;
+  width: 460px;
+  color: #fff;
+  font-size: 104px;
+  line-height: 104px;
+  letter-spacing: -5.2px;
+  font-weight: 400;
+}
+.idea-lead {
+  margin: 0;
+  width: 440px;
+  color: #ccc;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.idea-form .field,
+.idea-form textarea {
+  display: block;
+  width: 476px;
+  margin: 0 0 62px;
+  padding: 0 0 8px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  font-size: 22px;
+  line-height: 26.4px;
+  outline: none;
+  resize: none;
+}
+.idea-form textarea { height: 220px; margin-bottom: 56px; }
+.idea-form .field::placeholder,
+.idea-form textarea::placeholder { color: #8a8a8a; }
+.idea-form .dotlink {
+  color: #fff;
+  border-bottom-color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  background: none;
+  padding: 0 0 2px;
+  cursor: pointer;
+}
+
+.alma-quote {
+  margin: 0;
+  width: 900px;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -1.92px;
+  font-weight: 500;
+}
+.alma-by {
+  margin: 0;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  color: #757575;
+}
+.alma-col {
+  margin: 0;
+  width: 370px;
+  color: #757575;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.alma-photo { object-fit: cover; object-position: center top; }
+
+[data-rise] { opacity: 1; transform: none; }
+
+.contact .progress i { background: #fff; mix-blend-mode: difference; }
+.contact .cursor { opacity: 0; }
+
+@media (max-width: 859px) {
+  body.contact { overflow: auto; height: auto; }
+  body.contact .viewport { height: auto; overflow: visible; }
+  body.contact .scaler,
+  body.contact .track { width: 100% !important; height: auto; position: relative; transform: none !important; }
+  body.contact .band {
+    position: relative;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto;
+    min-height: 70vh;
+    overflow: visible;
+    padding: 120px 24px 64px;
+  }
+  body.contact .pin {
+    position: relative !important;
+    left: 0 !important;
+    top: auto !important;
+    margin: 18px 0;
+    max-width: 100%;
+  }
+  body.contact .say h1,
+  body.contact .say h2,
+  body.contact .idea h2 { font-size: 64px !important; line-height: 60px !important; }
+  body.contact .door,
+  body.contact .wm,
+  body.contact .faq-ring,
+  body.contact .key,
+  body.contact .progress { display: none; }
+  body.contact [data-rise] { opacity: 1; transform: none; }
+}

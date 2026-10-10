@@ -1,0 +1,118 @@
+body.journal { --track: 12034px; }
+
+.crumb {
+  position: absolute;
+  left: 64px;
+  top: 45px;
+  margin: 0;
+  color: #fff;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: -0.6px;
+}
+.crumb a { color: inherit; }
+
+.j-hero h1,
+.j-hero h2 { z-index: 3; font-weight: 400; }
+.flower { overflow: hidden; z-index: 1; }
+.flower img { width: 1100px; height: 900px; object-fit: cover; }
+
+.j-card { width: 480px; height: 585px; }
+.j-card h3 {
+  margin: 31px 0 16px;
+  width: 480px;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -1.92px;
+  font-weight: 500;
+}
+.j-card .lead {
+  margin: 0;
+  width: 480px;
+  color: #757575;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.j-card .dotlink {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-weight: 400;
+  font-size: 16px;
+}
+.j-shot { width: 490px; height: 585px; object-fit: cover; }
+
+.tomas-quote {
+  margin: 0;
+  width: 900px;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -1.92px;
+  font-weight: 500;
+}
+.tomas-by {
+  margin: 0;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  color: #757575;
+}
+.tomas-col {
+  margin: 0;
+  width: 370px;
+  color: #757575;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.tomas-photo { object-fit: cover; object-position: center top; }
+
+.j-wash {
+  position: absolute;
+  left: 166px;
+  top: 0;
+  width: 940px;
+  height: 900px;
+  background: linear-gradient(90deg, #fff 0%, #ededed 100%);
+  pointer-events: none;
+}
+.info-copy {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #757575;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+[data-rise] { opacity: 1; transform: none; }
+.journal .cursor { opacity: 0; }
+
+@media (max-width: 859px) {
+  body.journal { overflow: auto; height: auto; }
+  body.journal .viewport { height: auto; overflow: visible; }
+  body.journal .scaler,
+  body.journal .track { width: 100% !important; height: auto; position: relative; transform: none !important; }
+  body.journal .band {
+    position: relative;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto;
+    min-height: 70vh;
+    overflow: visible;
+    padding: 120px 24px 48px;
+  }
+  body.journal .pin { position: relative !important; left: 0 !important; top: auto !important; margin: 16px 0; max-width: 100%; }
+  body.journal .j-hero h1,
+  body.journal .j-hero h2 { font-size: 64px !important; line-height: 60px !important; }
+  body.journal .flower,
+  body.journal .key,
+  body.journal .progress { display: none; }
+  body.journal [data-rise] { opacity: 1; transform: none; }
+}

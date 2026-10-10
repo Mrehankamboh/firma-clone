@@ -1,0 +1,170 @@
+body.work { --track: 19047px; }
+
+.crumb {
+  position: absolute;
+  left: 64px;
+  top: 45px;
+  margin: 0;
+  color: #333;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: -0.6px;
+}
+.crumb a { color: inherit; }
+.crumb b { color: #fff; font-weight: 900; }
+
+.w-hero h1,
+.w-hero h2,
+.w-count { z-index: 5; }
+
+.w-shot {
+  width: 900px;
+  height: 900px;
+  overflow: hidden;
+  z-index: 3;
+}
+.w-shot img {
+  width: 1100px;
+  height: 900px;
+  max-width: none;
+  object-fit: cover;
+}
+
+.w-card {
+  width: 480px;
+  height: 441px;
+  z-index: 4;
+}
+.w-card::before {
+  content: "";
+  position: absolute;
+  left: -64px;
+  top: -64px;
+  width: 608px;
+  height: 569px;
+  background: #fff;
+  z-index: -1;
+}
+body.work .key { transform: none; }
+.w-card .kicker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  letter-spacing: 0.12px;
+}
+.w-card h2 {
+  position: absolute;
+  left: 0;
+  top: 45px;
+  margin: 0;
+  width: 480px;
+  font-size: 64px;
+  line-height: 57.6px;
+  letter-spacing: -3.2px;
+  font-weight: 500;
+}
+.w-card .body {
+  position: absolute;
+  left: 0;
+  top: 119px;
+  margin: 0;
+  width: 480px;
+  color: #757575;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.w-card.tall .body { top: 176px; }
+.w-card .dotlink {
+  position: absolute;
+  left: 0;
+  top: 401px;
+  font-weight: 400;
+}
+
+.nina-quote {
+  margin: 0;
+  width: 900px;
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: -1.92px;
+  font-weight: 500;
+}
+.nina-by {
+  margin: 0;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  color: #757575;
+}
+.nina-col {
+  margin: 0;
+  width: 370px;
+  color: #757575;
+  font-size: 16px;
+  line-height: 26.4px;
+}
+.nina-photo { object-fit: cover; object-position: center top; }
+body.work .nina-band .vmarq .roll { transform: translateY(-80px); }
+body.work .nina-band .vmarq span {
+  height: 685px;
+  justify-content: flex-start;
+}
+.nina-col strong { font-weight: 700; color: #000; }
+
+.w-wash {
+  position: absolute;
+  left: 166px;
+  top: 0;
+  width: 940px;
+  height: 900px;
+  background: linear-gradient(90deg, #fff 0%, #ededed 100%);
+  pointer-events: none;
+}
+.info-copy {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #757575;
+  font-size: 12px;
+  line-height: 21.6px;
+  letter-spacing: 0.12px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+[data-rise] { opacity: 1; transform: none; }
+.work .cursor { opacity: 0; }
+
+@media (max-width: 859px) {
+  body.work { overflow: auto; height: auto; }
+  body.work .viewport { height: auto; overflow: visible; }
+  body.work .scaler,
+  body.work .track { width: 100% !important; height: auto; position: relative; transform: none !important; }
+  body.work .band {
+    position: relative;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto;
+    min-height: 70vh;
+    overflow: visible;
+    padding: 120px 24px 48px;
+  }
+  body.work .pin { position: relative !important; left: 0 !important; top: auto !important; margin: 16px 0; max-width: 100%; }
+  body.work .w-hero h1,
+  body.work .w-hero h2 { font-size: 64px !important; line-height: 60px !important; }
+  body.work .w-shot,
+  body.work .key,
+  body.work .progress,
+  body.work .w-wash { display: none; }
+  body.work .w-card { height: auto; }
+  body.work .w-card h2,
+  body.work .w-card .body,
+  body.work .w-card .dotlink,
+  body.work .w-card .kicker { position: relative; top: auto; left: auto; }
+  body.work [data-rise] { opacity: 1; transform: none; }
+}
