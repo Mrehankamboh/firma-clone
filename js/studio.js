@@ -205,6 +205,14 @@ window.addEventListener("mousemove", (e) => {
 });
 
 const wmRoot = document.querySelector(".partners .wm");
+if (wmRoot) {
+  const rot = document.createElement("div");
+  rot.className = "wm-rot";
+  const line = "<span>FIRMA</span>".repeat(8);
+  for (let i = 0; i < 8; i++) {
+    const row = document.createElement("div");
+    row.className = "wm-row" + (i % 2 ? " rev" : "");
+    row.innerHTML = line + line;
     rot.appendChild(row);
   }
   wmRoot.appendChild(rot);
@@ -221,7 +229,7 @@ const wmRoot = document.querySelector(".partners .wm");
 window.addEventListener("resize", layout);
 layout();
 try {
-  const saved = Number(sessionStorage.getItem("journal-x"));
+  const saved = Number(sessionStorage.getItem("studio-x"));
   if (saved > 0) {
     target = Math.min(maxScroll(), saved);
     current = target;
@@ -229,7 +237,7 @@ try {
   }
 } catch (err) {}
 window.addEventListener("pagehide", () => {
-  try { sessionStorage.setItem("journal-x", String(Math.round(target))); } catch (err) {}
+  try { sessionStorage.setItem("studio-x", String(Math.round(target))); } catch (err) {}
 });
 requestAnimationFrame(tick);
 window.__scrollTo = (x) => {

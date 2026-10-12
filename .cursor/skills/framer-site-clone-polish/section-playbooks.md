@@ -931,6 +931,26 @@ Live markup keeps Our at `transform: none`, Services near `translateX(145px)`, a
 
 ---
 
+## 80. Firma — the same scroll glide on every page
+
+**Breaks:** The sideways pages ease. The phone layout and the stacked pages jump a full wheel notch.
+
+**Probe:** Home, work, studio, journal, and contact move the track with `current += (target - current) * 0.09`. Under 860px those pages become a normal vertical document, and case studies, articles, terms, privacy, and the 404 were already vertical. Those used the browser’s native wheel.
+
+**Fix:** Keep the sideways desktop loop. On a stacked page, ease `scrollTop` with that same 0.09 step. Skip it when the visitor prefers reduced motion.
+
+---
+
+## 81. Firma — a broken script stops the whole page
+
+**Breaks:** The studio page sits still. The wheel does nothing.
+
+**Probe:** `studio.js` has to parse before it can listen for the wheel. A cut-off watermark block is a syntax error, so the scroll loop never starts.
+
+**Fix:** Close that block the same way the other pages build the repeating wordmark. Keep the studio scroll memory on its own key.
+
+---
+
 ## 79. Firma — the reel fills the screen
 
 **Breaks:** Clicking FIRMA opens the showreel in a small centered box with native video controls.
